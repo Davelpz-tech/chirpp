@@ -18,10 +18,12 @@ socket.on('user-connected', name => {
 
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
-    const message = messageInput.value
-    appendMessage(`You: ${message}`)
-    socket.emit('send-chat-message', message)
-    messageInput.value = ''
+    if (messageInput.value != '') {
+        const message = messageInput.value
+        socket.emit('send-chat-message', message)
+        appendMessage(`You: ${message}`)
+        messageInput.value = ''
+    }
 })
 
 function appendMessage(message) {
